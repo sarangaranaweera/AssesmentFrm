@@ -18,6 +18,14 @@ You can copy and paste .env.my content to .env file that is my local running env
 ```
 php artisan migrate
 ```
+### Create an Admin
+
+After running migration , then run the `artisan seeder`
+
+```
+php artisan db:seed --class=UserSeeder
+```
+New admin will add to the database and use `admin@xyz.com` as admin email and `admin@321` as password.
 
 Now, in the terminal run `artisan serve` command. It will run the application at `http://127.0.0.1:8000` URL, and that URL path used in the Vue.js app.
 
