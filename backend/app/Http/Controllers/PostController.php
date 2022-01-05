@@ -6,7 +6,7 @@ use App\Interfaces\PostRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
-
+use Exception;
 
 class PostController extends Controller
 {
@@ -20,9 +20,16 @@ class PostController extends Controller
     //return posts according to user role
     public function index() 
     {
+        try{
             return response()->json([
                 'data' => $this->postRepository->getAllPost()
             ]);
+        }catch(Exception $e){
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+           
     }
 
     //create a post by user
@@ -32,9 +39,16 @@ class PostController extends Controller
             'question' => ['required'],
         ]);
 
-        return response()->json([
-            'data' => $this->postRepository->createPost($request->all())
-        ]);
+        try{
+            return response()->json([
+                'data' => $this->postRepository->createPost($request->all())
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+      
     }
 
     //delete user own post
